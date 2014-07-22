@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>jQuery Mobile Web App</title>
+<title>DM App</title>
 <link href="jquery-mobile/jquery.mobile.theme-1.3.0.min.css" rel="stylesheet" type="text/css"/>
 <link href="jquery-mobile/jquery.mobile.structure-1.3.0.min.css" rel="stylesheet" type="text/css"/>
 <link href="jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
@@ -23,13 +23,22 @@ $(document).ready(function(){
     		alert("Only 5 Numbers are allowed");
     	    return false;
  	 	}
-            var $Div = $('<div id="TextBoxDiv'+counter+'"></div>')
+            var $Div = $('<div id="TextBoxDiv'+ counter +'"></div>')
             $Div.append('<label for="text' + counter + '">Telephone No. ' + counter + ' :  <br> </label>' + '<input type="text" id="text' + counter + '" value="" />');
             $('#TextBoxesGroup').append($Div);
  	
     
 	    counter++;
 	});	
+	
+	$("#removeButton").click(function () {
+            if (counter == 1) {
+                alert("No more textbox to remove");
+                return false;
+            }
+              counter--;
+             $("#TextBoxDiv" + counter).remove();
+     });
 });
 </script>
 
@@ -43,38 +52,40 @@ $(document).ready(function(){
 
 	<div id="Tabs1">
 	  <ul>
-	    <li><a href="#tabs-1">New Outlet</a></li>
-	    <li><a href="#tabs-2">Monthly Update</a></li>
-	    <li><a href="#tabs-3">POS</a></li>
+	    <li class="grey"><a href="#tabs-1">New Outlet</a></li>
+	    <li class="green"><a href="#tabs-2">Monthly Update</a></li>
+	    <li class="blue"><a href="#tabs-3">POS</a></li>
       </ul>
 	  <div id="tabs-1">
 	    <p>	<div data-role="content">
         <div class="ui-outlet-names">
-	        <label for="textinput">Outlet Name:</label>
-	        <input type="text" name="textinput" id="textinput" value=""  /></div>
+	        <label for="textinput">Outlet Name:</label></div>
+	        <input name="textinput" type="text" id="textinput" value=""  />
 	        <label for="textinput2">Address 1:</label>
-	        <input type="text" name="textinput2" id="textinput2" value=""  />
-	        <label for="textinput3">Address 2:</label>
-	        <input type="text" name="textinput3" id="textinput3" value=""  />
+	        <input name="textinput2" type="text" class="color" id="textinput2" value=""  />
+	        <div class="ui-address2"><label for="textinput3">Address 2:</label></div>
+	        <input name="textinput3" type="text" id="textinput3" value=""  />
 	        <label for="text">Address 3:</label>
-	        <input type="text" name="textinput4" id="textinput4" value=""  />
+	        <input name="textinput4" type="text" class="color" id="textinput4" value=""  />
  		<div class="ui-grid-phone">
  		  <div class="ui-block-aPhone">
           	<div id='TextBoxesGroup'>
           		<div id="TextBoxDiv1">
- 		  			<label for="text" >Telephone No. 1 : </label>
+ 		  			<div class="ui-block-phoneTitle"><label for="text" >Telephone No. 1 : </label></div>
  		  			<input type='text' id='text' />
  				</div>
            </div>
           </div>
- 		  <div class="ui-block-bPhone"><br><button data-icon="plus" data-iconpos="notext" id="addButton"></button>
+ 		  <div class="ui-block-bPhone"><br>
+ 		  <button data-icon="plus" data-iconpos="notext" id="addButton">+</button><button data-icon="minus" data-iconpos="notext" id="removeButton">-</button>
        	  </div>
 		</div>
         
-        <div class="ui-grid-phone">
-     		<div class="ui-block-aPhone">        
+        <div class="ui-grid-township">
+     		<div class="ui-block-townshipA">        
 				<label for="selectmenu" class="select">Township:</label>
 	        		<select name="selectmenu" id="selectmenu">
+                    	<option value="option0">Please Select</option>
 	         	 		<option value="option1">Ahlone</option>
 	         	 		<option value="option2">Bahan</option>
 	        	  		<option value="option3">Botataung</option>
@@ -83,17 +94,19 @@ $(document).ready(function(){
       </div>
       <br>
       <div class="dates">
-      	<div class="temp"><label for = "Datepicker2">Opening Date:</label> 			<input type="text" id="Datepicker2">
+      	<div class="temp"><div class="tempTitle"><label for = "Datepicker2">Opening Date:</label></div>
+          <input type="text" id="Datepicker2"/>
         </div>
-        <div class="temp2"><label for="Datepicker1">Installation Date:</label>
+        
+        <div class="temp2"><div class="temp2Title"><label for="Datepicker1">Installation Date:</label></div>
           <input type="text" id="Datepicker1">
         </div>
       </div>
               
-      <div class=Owner><h2>Owner Info</h2>
+      <div class=Owner><h2>Owner Info</h2></div>
       
         <label for="textinput8">Name:</label>
-        <input type="text" name="textinput8" id="textinput8" value=""  />
+        <input name="textinput8" type="text" class="color" id="textinput8" value=""  />
       
    
       <div class="ui-grid-a">
@@ -104,12 +117,67 @@ $(document).ready(function(){
             </div>
 	  	</div>
       </div>
-          <label for="textarea">Hobbies:</label>
-      	  <textarea cols="40" rows="4" name="textarea" id="textarea"></textarea></div>
-               <div class="manager"> <h2>Manager Info</h2>
+                    <label for="textarea">Hobbies:</label>
+          <div class="Checkboxes">
+          <div class="box1">
+         
+            <fieldset data-role="controlgroup">
+              <input type="checkbox" name="checkbox1" id="checkbox1_0" class="custom" value="" />
+              <label for="checkbox1_0">Billiard</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_1" class="custom" value="" />
+              <label for="checkbox1_1">Football</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_2" class="custom" value="" />
+              <label for="checkbox1_2">Golf</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_3" class="custom" value="" />
+              <label for="checkbox1_3">Swimming</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_4" class="custom" value="" />
+              <label for="checkbox1_4">Reading</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_5" class="custom" value="" />
+              <label for="checkbox1_5">Dancing</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_6" class="custom" value="" />
+              <label for="checkbox1_6">Cooking</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_7" class="custom" value="" />
+              <label for="checkbox1_7">Writing</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_8" class="custom" value="" />
+              <label for="checkbox1_8">Badmintion</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_9" class="custom" value="" />
+              <label for="checkbox1_9">Traveling</label>
+            </fieldset>
+          
+          </div>
+          <div class="box2">
+            
+        <fieldset data-role="controlgroup">
+          <input type="checkbox" name="checkbox2" id="checkbox2_0" class="custom" value="" />
+          <label for="checkbox2_0">Trade</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_1" class="custom" value="" />
+          <label for="checkbox2_1">Business</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_2" class="custom" value="" />
+          <label for="checkbox2_2">Driving</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_3" class="custom" value="" />
+          <label for="checkbox2_3">Music</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_4" class="custom" value="" />
+          <label for="checkbox2_4">Photograph</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_5" class="custom" value="" />
+          <label for="checkbox2_5">Teaching</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_6" class="custom" value="" />
+          <label for="checkbox2_6">Listening</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_7" class="custom" value="" />
+          <label for="checkbox2_7">Selling</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_8" class="custom" value="" />
+          <label for="checkbox2_8">Watching TV</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_9" class="custom" value="" />
+          <label for="checkbox2_9">Singing</label>
+        </fieldset>
+      
+
+          </div>
+          </div>
+       
+      <div class="manager"> <h2>Manager Info</h2> </div>
       
         <label for="textinput8">Name:</label>
-        <input type="text" name="textinput8" id="textinput8" value=""  />
+        <input name="textinput8" type="text" class="color" id="textinput8" value=""  />
       
    
       <div class="ui-grid-a">
@@ -121,69 +189,108 @@ $(document).ready(function(){
             </div>
 	  	</div>
       </div>
+      
           <label for="textarea">Hobbies:</label>
-      	  <textarea cols="40" rows="4" name="textarea" id="textarea"></textarea></div>
-      <br>
+          <div class="Checkboxes">
+          <div class="box1">
+         
+            <fieldset data-role="controlgroup">
+              <input type="checkbox" name="checkbox1" id="checkbox1_0" class="custom" value="" />
+              <label for="checkbox1_0">Billiard</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_1" class="custom" value="" />
+              <label for="checkbox1_1">Football</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_2" class="custom" value="" />
+              <label for="checkbox1_2">Golf</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_3" class="custom" value="" />
+              <label for="checkbox1_3">Swimming</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_4" class="custom" value="" />
+              <label for="checkbox1_4">Reading</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_5" class="custom" value="" />
+              <label for="checkbox1_5">Dancing</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_6" class="custom" value="" />
+              <label for="checkbox1_6">Cooking</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_7" class="custom" value="" />
+              <label for="checkbox1_7">Writing</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_8" class="custom" value="" />
+              <label for="checkbox1_8">Badmintion</label>
+              <input type="checkbox" name="checkbox1" id="checkbox1_9" class="custom" value="" />
+              <label for="checkbox1_9">Traveling</label>
+            </fieldset>
+          
+          </div>
+          <div class="box2">
+            
+        <fieldset data-role="controlgroup">
+          <input type="checkbox" name="checkbox2" id="checkbox2_0" class="custom" value="" />
+          <label for="checkbox2_0">Trade</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_1" class="custom" value="" />
+          <label for="checkbox2_1">Business</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_2" class="custom" value="" />
+          <label for="checkbox2_2">Driving</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_3" class="custom" value="" />
+          <label for="checkbox2_3">Music</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_4" class="custom" value="" />
+          <label for="checkbox2_4">Photograph</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_5" class="custom" value="" />
+          <label for="checkbox2_5">Teaching</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_6" class="custom" value="" />
+          <label for="checkbox2_6">Listening</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_7" class="custom" value="" />
+          <label for="checkbox2_7">Selling</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_8" class="custom" value="" />
+          <label for="checkbox2_8">Watching TV</label>
+          <input type="checkbox" name="checkbox2" id="checkbox2_9" class="custom" value="" />
+          <label for="checkbox2_9">Singing</label>
+        </fieldset>
+      
+
+          </div>
+          </div>
+    
+      
+<br>
       <br>    
-      <div class="ui-grid-cust">
+      <div class="border"><div class="ui-grid-cust">
         <div class="ui-block-custA">
             <label for="textinput5">License No.:</label>
-            <input type="text" name="textinput5" id="textinput5" value=""  />       
+            <input name="textinput5" type="text" class="color" id="textinput5" value=""  />       
         </div>
         <div class="ui-block-custB">
             <label for="textinput6">No. of Table:</label>
-            <input type="text" name="textinput6" id="textinput6" value=""  />      
+            <input name="textinput6" type="text" class="color" id="textinput6" value=""  />      
         </div>
+        
+        	<div class="ui-block-custGA1">
+        
+           		<div class="outletTitle"><label for="selectmenu4" class="select">Outlet Classification:		</label></div>
+           		<select name="selectmenu4" id="selectmenu4">
+                <option value="option0">Please Select</option>
+             		<option value="option1">TB</option>
+              		<option value="option2">MB</option>
+              		<option value="option3">DS</option>
+            	</select>         
+        	</div>
+        	<div class="ui-block-custGB">
+        		<div class="SalesTitle"><label for="Datepicker3">Sales Person Start Date: </label></div>
+	      		<input type="text" id="Datepicker3">
+	    	</div>
+        </div>
+      
+        <div class="ui-grid-cust">
         <div class="ui-block-custA1">
-           <label for="selectmenu4" class="select">Outlet Classification:</label>
-            <select name="selectmenu4" id="selectmenu4">
-              <option value="option1">TB</option>
-              <option value="option2">MB</option>
-              <option value="option3">DS</option>
-            </select>         
-        </div>
-        <div class="ui-block-custB1">
              <label for="selectmenu2" class="select">Call Frequency:</label>
             <select name="selectmenu2" id="selectmenu2">
+            <option value="option0">Please Select</option>
               <option value="option1">Once a Month</option>
               <option value="option2">Once Four Months</option>
               <option value="option3">Once Six Months</option>
             </select>
         </div>
-    </div>
-	<div class="ui-grid-cust">
-	    <div class="ui-block-custA">
-	        <label for="textinput7">Application Person:</label>
-	        <input type="text" name="textinput7" id="textinput7" value=""  /> 
-	    </div>
-	 	<div class="ui-block-custB1">
-	        <label for="selectmenu5" class="select">Channel:</label>
-	        <select name="selectmenu5" id="selectmenu5">
-	          <option value="option1">Refreshment</option>
-	          <option value="option2">Modern On Trade</option>
-	          <option value="option3">Modern Off Trade</option>
-            </select>
-	    </div>
-	    <div class="ui-block-custA1">
-	        <label for="selectmenu6" class="select">Segment:</label>
-	        <select name="selectmenu6" id="selectmenu6">
-	          <option value="option1">Restaurant</option>
-	          <option value="option2">Food Stall</option>
-	          <option value="option3">Traditional Food</option>
-            </select>
-	    </div>
-	</div>
-
-      <div class="ui-grid-cust">
-	    <div class="ui-block-custA"><label for="Datepicker3">Sales Person Start Date: </label>
-	      <input type="text" id="Datepicker3">
-	    </div>
-	    <div class="ui-block-custB"><label for="Datepicker4">Outlet Closed Date: </label>
-	      <input type="text" id="Datepicker4">
-	    </div>
-        <div class="ui-block-custA1">
+    
+    <div class="ui-block-custB1">
             <label for="selectmenu3" class="select">Supplier Type:</label>
             <select name="selectmenu3" id="selectmenu3">
+            <option value="option0">Please Select</option>
               <option value="option1">MBL</option>
               <option value="option2">Distributor</option>
               <option value="option3">Wholesales</option>
@@ -196,6 +303,39 @@ $(document).ready(function(){
               <option value="option10">Sundry Shop</option>
             </select>
         </div>
+		
+	    <div class="ui-block-custGA">
+	        <div class="appliTitle"><label for="textinput7">Application Person:</label></div>
+	        <input type="text" name="textinput7" id="textinput7" value=""  /> 
+	    </div>
+        
+	 	<div class="ui-block-custGB1">
+	        <div class="channelTitle"><label for="selectmenu5" class="select">Channel:</label></div>
+	        <select name="selectmenu5" id="selectmenu5">
+            <option value="option0">Please Select</option>
+	          <option value="option1">Refreshment</option>
+	          <option value="option2">Modern On Trade</option>
+	          <option value="option3">Modern Off Trade</option>
+            </select>
+	    </div>
+        </div>
+        </div>
+        
+        <div class="ui-grid-cust">
+	    <div class="ui-block-custA1">
+	        <label for="selectmenu6" class="select">Segment:</label>
+	        <select name="selectmenu6" id="selectmenu6">
+            <option value="option0">Please Select</option>
+	          <option value="option1">Restaurant</option>
+	          <option value="option2">Food Stall</option>
+	          <option value="option3">Traditional Food</option>
+            </select>
+	    </div>
+	    
+	    <div class="ui-block-custB"><label for="Datepicker4">Outlet Closed Date: </label>
+	      <input type="text" class="color" id="Datepicker4">
+	    </div>
+        
       </div>
 	</div></p>
       </div>
